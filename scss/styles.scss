@@ -1,0 +1,278 @@
+// Variables
+$primary-color: #420e4d;
+$secondary-color: #341042;
+$text-color: #cccccc;
+$white: #ffffff;
+$black: #000000;
+$gray-light: #f1eeee;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property, $duration, $ease) {
+  transition: $property $duration $ease;
+}
+
+// General
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, $primary-color, $black);
+  color: $text-color;
+  text-align: center;
+}
+
+// Header
+header {
+  background: linear-gradient(to right, $black, $secondary-color);
+  color: $white;
+  padding: 20px;
+
+  .logo {
+    @include flex-center;
+    max-width: 150px;
+    margin-bottom: 10px;
+  }
+
+  .logo-container {
+    @include flex-center;
+  }
+
+  .text-container {
+    flex-grow: 1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5em;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// Menú
+nav {
+  margin-top: 15px;
+  text-align: right;
+
+  .menu {
+    list-style-type: none;
+    display: flex;
+
+    li {
+      margin: 0 15px;
+    }
+
+    a {
+      color: $white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+}
+
+// Galería
+.gallery, .portada {
+  @include flex-center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 0;
+
+  .item, .destacado {
+    flex: 0 0 30%;
+    background-color: rgb(10, 10, 10);
+    border: 1px solid #142b75;
+    padding: 10px;
+    width: 30%;
+    @include transition(transform, 0.3s, ease);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.muestrario {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: rgb(52, 32, 85);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+// Elementos generales
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+p {
+  font-size: 18px;
+  color: $gray-light;
+}
+
+// Footer
+footer {
+  background-color: #080808;
+  color: rgb(214, 27, 27);
+  padding: 50px;
+  margin-top: 20px;
+}
+
+// Contacto
+.container {
+  max-width: 800px;
+  margin: auto;
+  background-color: $black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  .instrucciones {
+    margin-bottom: 20px;
+
+    h2 {
+      color: #4f0852;
+    }
+  }
+
+  .redes-sociales {
+    text-align: center;
+
+    h2 {
+      color: #3a0c41;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+
+        img {
+          width: 100px;
+          height: auto;
+          @include transition(transform, 0.3s, ease);
+        }
+      }
+    }
+  }
+}
+
+// Detalle del producto
+.producto-detalle {
+  @include flex-center;
+  flex-direction: column;
+  padding: 40px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .descripcion {
+    max-width: 800px;
+    text-align: center;
+
+    h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #f1ecec;
+    }
+  }
+}
+
+// Media Queries
+@media (max-width: 600px) {
+  header {
+    .logo-container {
+      flex-direction: column;
+      align-items: center;
+
+      .text-container h1 {
+        font-size: 1.2rem;
+      }
+    }
+
+    nav {
+      .menu {
+        flex-direction: column;
+
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+
+  main {
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    .logo-container {
+      gap: 0.5rem;
+    }
+
+    nav {
+      .menu {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+    }
+  }
+
+  main {
+    .muestrario {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding: 3rem;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .muestrario {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+  }
+}
